@@ -132,6 +132,7 @@ Try generating new mazes to confirm the solver still works.
 ## 4. Submitting to Gradescope
 
 * Upload `solver.py` to Gradescope under the A1 assignment.
+* **Make sure your filename is `solver.py`. All other filenames will be rejected by the autograder, and you will not receive a grade.**
 * Ensure your implementations are inside the provided function stubs.
 * Wait for the autograder to run.
 * The autograder will run basic test cases and show partial results. Additional hidden tests will be revealed after the due date.
