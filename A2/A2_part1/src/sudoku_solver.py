@@ -65,7 +65,7 @@ def is_valid(board, row, col, num):
 
 def solve_sudoku(board):
     """
-    Solves the Sudoku puzzle in 'board' using backtracking.
+    Solves the Sudoku puzzle in 'board' using DFS.
 
     Parameters:
     board (list[list[int]]): A 9x9 Sudoku board where 0 indicates an empty cell.
