@@ -13,7 +13,7 @@ class MonteCarloControl:
     """
     def __init__(self, env: RaceTrack, gamma: float = 1.0, epsilon: float = 0.1, Q0: float = 0.0, max_episode_size : int = 1000):
         """
-        Initialize the Monte Carlo Control object.
+        Initialize the Monte Carlo Control object. 
 
         Q, C, and policies are defaultdicts that have keys representing environment states.  
         Defaultdicts (search up the docs!) allow you to set a sensible default value 
@@ -38,14 +38,7 @@ class MonteCarloControl:
         
         Returns: none, stores data as class attributes
         """
-        self.env = env
-        self.gamma = gamma
-        self.epsilon = epsilon
-        self.Q = defaultdict(lambda: np.zeros(env.n_actions)+Q0)
-        self.C = defaultdict(lambda: np.zeros(env.n_actions))
-        self.target_policy = defaultdict(lambda: np.ones(env.n_actions)/env.n_actions) # random uniform default
-        self.behavior_policy = defaultdict(lambda: np.ones(env.n_actions)/env.n_actions) # random uniform default
-        self.max_episode_size = max_episode_size
+         # Your code here
 
 
     def create_target_greedy_policy(self):
@@ -58,11 +51,7 @@ class MonteCarloControl:
         Args: none
         Returns: none, stores new policy in self.target_policy
         """
-        for state in self.Q.keys():
-            action = np.argmax(self.Q[state])
-            prob = np.zeros(self.env.n_actions)
-            prob[action] = 1.0
-            self.target_policy[state] = prob
+        # Your code here
 
     def create_behavior_egreedy_policy(self):
         """
@@ -71,89 +60,52 @@ class MonteCarloControl:
         calculate the epsilon greedy behavior probability vector and store it in self.behavior_policy[state]
         
         Args: none
-        Returns: none
+        Returns: none, stores new policy in self.target_policy
         """
-        for state, prob in self.target_policy.items():
-            soft = prob.copy()
-            for index, element in enumerate(soft):
-                assert element in [0.0, 1.0]
-                if element == 0.0:
-                    soft[index] = 1/self.env.n_actions * self.epsilon
-                else:
-                    soft[index] = 1/self.env.n_actions * self.epsilon + (1. - self.epsilon)
-                
-            self.behavior_policy[state] = soft
+        # Your code here
+
         
     def egreedy_selection(self, state):
         """
         Select an action proportional to the probabilities of epsilon-greedy encoded in self.behavior_policy
-        HINT: check out https://www.w3schools.com/python/ref_random_choices.asp
+        HINT: 
+        - check out https://www.w3schools.com/python/ref_random_choices.asp
+        - note that random_choices returns a numpy array, you want a single int
+        - make sure you are using the probabilities encoded in self.behavior_policy 
 
         Args: state (string): the current state in which to choose an action
         Returns: action (int): an action index between 0 and self.env.n_actions
         """
-        probs = self.behavior_policy[state]
-        actions = [n for n in range(self.env.n_actions)]
-        return random.choices(actions, weights=probs)[0]
+        # Your code here
 
     def generate_egreedy_episode(self):
         """
         Generate an episode using the epsilon-greedy behavior policy. Will not go longer than self.max_episode_size
         
+        Hints: 
+        - need to setup and use self.env methods and attributes
+        - use self.egreedy_selection() above as a helper function
+        - use the behavior e-greedy policy attribute aleady calculated (do not update policy here!)
+        
         Returns:
             list: The generated episode, which is a list of (state, action, reward) tuples.
         """
-        # setup
-        episode = []
-        self.env.reset()                        # reset to the beginning of a race
-        self.create_target_greedy_policy()      # take current Q, make target policy
-        self.create_behavior_egreedy_policy()   # take current target policy, make behavior policy
+        # Your code here
         
-        # start the race
-        while len(episode)<self.max_episode_size:
-            state = self.env.get_state()
-            statekey = str(state) # dictionary needs a hashable key, won't work with the numpy array
-            action = self.egreedy_selection(statekey) 
-            reward = self.env.take_action( action )
-
-            episode.append((state, action, reward))
-
-            if self.env.is_terminal_state():
-                break
-
-        return episode
     
     def generate_greedy_episode(self):
         """
         Generate an episode using the greedy target policy. Will not go longer than self.max_episode_size
         Note: this function is not used during learning, its only for evaluating the target policy
         
+        Hints: 
+        - need to setup and use self.env methods and attributes
+        - use the greedy policy attribute aleady calculated (do not update policy here!)
+
         Returns:
             list: The generated episode, which is a list of (state, action, reward) tuples.
         """
-        # setup
-        episode = []
-        self.env.reset()                        # reset to the beginning of a race
-        pi = self.get_greedy_policy()
-        
-        # start the race
-        while len(episode)<self.max_episode_size:
-            state = self.env.get_state()
-            statekey = str(state) # dictionary needs a hashable key, won't work with the numpy array
-            
-            if statekey in pi:
-                action = (int)(pi[statekey]) # cast necessary because it comes out as np.int64 which breaks downstream code 
-            else:
-                action = random.choice(range(self.env.n_actions))
-            
-            reward = self.env.take_action( action )
-
-            episode.append((state, action, reward))
-
-            if self.env.is_terminal_state():
-                break
-
-        return episode
+        # Your code here
     
     def update_offpolicy(self, episode):
         """
@@ -163,17 +115,7 @@ class MonteCarloControl:
         Args: episode (list): An episode generated by the behavior policy; a list of (state, action, reward) tuples.
         Returns: none
         """
-        G = 0
-        W = 1.0
-        for t in reversed(range(len(episode))):
-            state, action, reward = episode[t]
-            statekey = str(state) # dictionary needs a hashable key, won't work with the numpy array
-            G = self.gamma * G + reward
-            self.C[statekey][action] += W
-            self.Q[statekey][action] += (W / self.C[statekey][action]) * (G - self.Q[statekey][action])
-            W *= self.target_policy[statekey][action] / self.behavior_policy[statekey][action]
-            if W==0.0:
-                break
+        # Your code here
 
     
     def update_onpolicy(self, episode):
@@ -184,21 +126,7 @@ class MonteCarloControl:
         Args: episode (list): An episode generated by the behavior policy; a list of (state, action, reward) tuples.
         Returns: none
         """
-        G = 0
-        W = 1.0
-        visited={}
-
-        for t in range(len(episode)):
-            state, action, reward = episode[t]
-            statekey = str(state) # dictionary needs a hashable key, won't work with the numpy array
-            visitkey = str(state) + str(action)
-
-            G = self.gamma * G + reward
-
-            if visitkey not in visited.keys():
-                self.C[statekey][action] += W
-                self.Q[statekey][action] += (W / self.C[statekey][action]) * (G - self.Q[statekey][action])
-                visited[visitkey] = True
+        # Your code here
 
 
     def train_offpolicy(self, num_episodes):
@@ -217,7 +145,7 @@ class MonteCarloControl:
 
     def get_greedy_policy(self):
         """
-        Retrieve the learned target policy.
+        Retrieve the learned target policy in the form of an action index per state
         
         Returns:
             dict: The learned target policy.
