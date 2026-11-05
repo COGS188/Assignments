@@ -1,7 +1,7 @@
 # Assignment 3: Solving the Racetrack Problem using Dynamic Programming, Monte Carlo Control, and TD Learning
 
 ## Overview
-You will implement **Dynamic Programming (DP)**, **Monte Carlo (MC) Control**, and **TD Learning** methods to solve the **Racetrack problem**. You will complete functions for **policy iteration, value iteration, off-policy MC control with weighted importance sampling, and SARSA TD learning**.
+You will implement **Dynamic Programming (DP)**, **Monte Carlo (MC) Control**, and **TD Learning** methods to solve the **Racetrack problem**. You will complete functions for **policy iteration, value iteration, off-policy MC control with weighted importance sampling, and on-policy TD learning (SARSA)**.
 
 A Jupyter Notebook (`racecar.ipynb`) is provided to help you visualize the results of your implementation. You should use it to check if your policies are leading to optimal behavior.
 
