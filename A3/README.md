@@ -1,7 +1,7 @@
-# Assignment 3: Solving the Racetrack Problem using Dynamic Programming and Monte Carlo Control
+# Assignment 3: Solving the Racetrack Problem using Dynamic Programming, Monte Carlo Control, and TD Learning
 
 ## Overview
-You will implement **Dynamic Programming (DP)** and **Monte Carlo (MC) Control** methods to solve the **Racetrack problem**. You will complete functions for **policy iteration, value iteration, and off-policy MC control with weighted importance sampling**.
+You will implement **Dynamic Programming (DP)**, **Monte Carlo (MC) Control**, and **TD Learning** methods to solve the **Racetrack problem**. You will complete functions for **policy iteration, value iteration, off-policy MC control with weighted importance sampling, and on-policy TD learning (SARSA)**.
 
 A Jupyter Notebook (`racecar.ipynb`) is provided to help you visualize the results of your implementation. You should use it to check if your policies are leading to optimal behavior.
 
@@ -48,13 +48,27 @@ Complete the following functions in `src/montecarlo.py`:
    - Use **weighted importance sampling** to update Q-values.
    - Implement according to **Sutton & Barto's Algorithm (Figure 5.9)**.
 
-After you're done, run the Jupyter Notebook (`racecar.ipynb`) to visualize the results of your implementation.
+### Part 3: Implementing TD Learning (SARSA, on-policy)
+
+Complete the following functions in `src/td.py`:
+
+1. **SARSA episode (`run_episode`)**
+   - Generate one episode using epsilon-greedy action selection, updating Q after every step with the SARSA update (using the next action actually taken, not the max).
+
+2. **Greedy episode (`generate_greedy_episode`)**
+   - Generate one episode always taking the best-known action. No exploration and no Q updates; this is only for evaluating what was learned.
 
 ### Submission
+
+After you're done, run the Jupyter Notebook (`racecar.ipynb`) to visualize the results of your implementation.
 
 Submit:
 * `dp.py` 
 * `montecarlo.py`
+* `td.py` 
 * `racecar.ipynb`
 
-In `racecar.ipynb`, you are free to add any additional code to help you visualize the results of your implementation. But at the minimum, it should include all the plots that were provided in the starter code.
+**Make sure to run all cells in `racecar.ipynb`, and produce all plots prior to submitting.** 
+
+You are free to add any additional code to help you visualize the results of your implementation. But at the minimum, it should include all the plots that were provided in the starter code.
+
