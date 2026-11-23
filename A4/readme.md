@@ -25,8 +25,13 @@ View the instructions in the `A4_part2_cartpole_dqn.ipynb`.
 You will need to submit the following files to Gradescope:
 
 `td.py`
+
 `td-balance.png`
+
 `td-swingup.png`
+
 `td_learning_transfer_swingup_cartpole.png`
+
 `dqn.py`
+
 `rewards_plot_dqn.png`
