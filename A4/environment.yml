@@ -1,10 +1,11 @@
 name: A4
 channels:
-  - defaults
   - conda-forge
 dependencies:
   - python=3.12
   - pip
+  - cmake
+  - ffmpeg
   - numpy
   - pandas
   - pygame
@@ -14,8 +15,8 @@ dependencies:
   - scikit-learn
   - jupyter
   - ipykernel
+  - pytorch
   - pip:
     - pytest
     - mujoco
     - dm_control
-    - torch

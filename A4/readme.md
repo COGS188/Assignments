@@ -1,5 +1,4 @@
 # A4
-## Deadline: March 5th, 23:59 PM (PST)
 
 In A4, you are going to implement the Temporal Difference (TD) learning algorithm and Deep Q-Network (DQN) algorithm. You will use the google-deepmind's MuJoCo environment, mediated by dm_control. You will implement the algorithms in the `td.py` and `dqn.py` files.
 
@@ -20,3 +19,14 @@ View the instructions in the `A4_part1_cartpole_td.ipynb`.
 ### Deep Q-Network (DQN)
 
 View the instructions in the `A4_part2_cartpole_dqn.ipynb`.
+
+# Submission:
+
+You will need to submit the following files to Gradescope:
+
+`td.py`
+`td-balance.png`
+`td-swingup.png`
+`td_learning_transfer_swingup_cartpole.png`
+`dqn.py`
+`rewards_plot_dqn.png`
