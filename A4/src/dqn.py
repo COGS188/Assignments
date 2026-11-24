@@ -338,6 +338,8 @@ class DQNTrainer:
         plt.xlabel("Episode")
         plt.ylabel("Reward")
         plt.plot(rewards_t.numpy(), label="Episode Reward")
+        if show_result:
+            plt.savefig("rewards_plot_dqn.png")                
 
         plt.pause(0.001)
         if is_ipython:
@@ -392,4 +394,3 @@ class DQNTrainer:
         self.plot_rewards(show_result=True)
         plt.ioff()
         plt.show()
-        plt.savefig("rewards_plot_dqn.png")
